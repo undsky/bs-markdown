@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+        Remove this if you use the .htaccess -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title>demo</title>
+        <meta name="description" content="">
+        <meta name="author" content="10066125">
+
+        <meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+        <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+        <link href="http://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <form>
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default"></button>
+                </div>
+                <div class="btn-group"></div>
+                <div class="btn-group"></div>
+            </div>
+        </form>
+        <textarea id="text-input" oninput="this.editor.update()" rows="6"
+        cols="60">Type **Markdown** here.</textarea>
+        <div id="preview"></div>
+        <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+        <![endif]-->
+        <!--[if gte IE 9]><!-->
+        <script src="http://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+        <!--<![endif]-->
+        <script src="http://cdn.bootcss.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/markdown.min.js"></script>
+        <script type="text/javascript">
+			function Editor(input, preview) {
+				this.update = function() {
+					preview.innerHTML = markdown.toHTML(input.value);
+				};
+				input.editor = this;
+				this.update();
+			}
+
+			var $ = function(id) {
+				return document.getElementById(id);
+			};
+			new Editor($("text-input"), $("preview"));
+        </script>
+    </body>
+</html>
