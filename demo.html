@@ -81,9 +81,32 @@
                     <button type="button" class="btn btn-default bsmd-btn-ul" title="无序列表">
                         <i class="fa fa-list-ul"></i>
                     </button>
-                    <button type="button" class="btn btn-default bsmd-btn-header" title="标题">
-                        <i class="fa fa-header"></i>
-                    </button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="标题">
+                            <i class="fa fa-header"></i>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="bsmd-btn-header" href="javascript:void(0);"><i class="fa fa-header"></i>1</a>
+                            </li>
+                            <li>
+                                <a class="bsmd-btn-header" href="javascript:void(0);"><i class="fa fa-header"></i>2</a>
+                            </li>
+                            <li>
+                                <a class="bsmd-btn-header" href="javascript:void(0);"><i class="fa fa-header"></i>3</a>
+                            </li>
+                            <li>
+                                <a class="bsmd-btn-header" href="javascript:void(0);"><i class="fa fa-header"></i>4</a>
+                            </li>
+                            <li>
+                                <a class="bsmd-btn-header" href="javascript:void(0);"><i class="fa fa-header"></i>5</a>
+                            </li>
+                            <li>
+                                <a class="bsmd-btn-header" href="javascript:void(0);"><i class="fa fa-header"></i>6</a>
+                            </li>
+                        </ul>
+                    </div>
                     <button type="button" class="btn btn-default bsmd-btn-ellipsis" title="分割线">
                         <i class="fa fa-ellipsis-h"></i>
                     </button>
@@ -126,6 +149,16 @@
 				$('#bsmd .bsmd-preview').html(markdown.toHTML(editor.getValue()));
 			});
 
+			function addLine(editor, num) {
+				for (var i = 0; i < num; i++) {
+					editor.getSession().getDocument().insertNewLine(editor.getSelection().getCursor());
+				};
+			}
+
+			function addText(editor, text) {
+				editor.getSession().getDocument().insertInLine(editor.getSelection().getCursor(), text);
+			}
+
 			$(function() {
 				$('#bsmd .bsmd-preview').html(markdown.toHTML(editor.getValue()));
 
@@ -161,12 +194,27 @@
 					//无序列表
 				});
 
-				$('#bsmd .bsmd-btn-header').click(function() {
+				$('a.bsmd-btn-header').each(function(index) {
 					//标题
+					$(this).click(function() {
+						var c = '';
+
+						for (var i = 0; i < (index + 1); i++) {
+							c += '#';
+						};
+
+						addText(editor, c + (index + 1) + '级标题' + c);
+						editor.focus();
+
+					});
 				});
 
 				$('#bsmd .bsmd-btn-ellipsis').click(function() {
 					//分割线
+					addLine(editor, 2);
+					addText(editor, '-------');
+					addLine(editor, 2);
+					editor.focus();
 				});
 
 				$('#bsmd .bsmd-btn-undo').click(function() {
