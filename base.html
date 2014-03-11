@@ -64,42 +64,40 @@
                     <button type="button" class="btn btn-default" title="链接" data-toggle="modal" data-target="#bsmd-modal-link">
                         <i class="fa fa-link"></i>
                     </button>
-                    <div class="modal fade" id="bsmd-modal-link" role="dialog" aria-labelledby="bsmd-title-link">
+                    <form class="form-horizontal bsmd-form-link modal fade" id="bsmd-modal-link" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                         &times;
                                     </button>
-                                    <h4 class="modal-title" id="bsmd-title-link">链接</h4>
+                                    <h4 class="modal-title">链接</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal" role="form">
-                                        <div class="form-group">
-                                            <label for="bsmd-link-title" class="col-sm-2 control-label">标题：</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="bsmd-link-title" placeholder="标题">
-                                            </div>
+                                    <div class="form-group">
+                                        <label for="bsmd-link-title" class="col-sm-2 control-label">标题：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="title" class="form-control" id="bsmd-link-title" placeholder="标题">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="bsmd-link-url" class="col-sm-2 control-label">网址：</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" value="http://" class="form-control" id="bsmd-link-url" placeholder="网址">
-                                            </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bsmd-link-url" class="col-sm-2 control-label">网址：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="url" value="http://" class="form-control" id="bsmd-link-url" placeholder="网址">
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">
                                         关闭
                                     </button>
-                                    <button type="button" class="btn btn-primary bsmd-btn-link">
+                                    <button type="submit" class="btn btn-primary">
                                         确定
                                     </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                     <button type="button" class="btn btn-default bsmd-btn-quote" title="引用">
                         <i class="fa fa-quote-left"></i>
                     </button>
@@ -138,42 +136,40 @@
                     <button type="button" class="btn btn-default" title="图片" data-toggle="modal" data-target="#bsmd-modal-picture">
                         <i class="fa fa-picture-o"></i>
                     </button>
-                    <div class="modal fade" id="bsmd-modal-picture" role="dialog" aria-labelledby="bsmd-title-picture">
+                    <form class="form-horizontal bsmd-form-picture modal fade" id="bsmd-modal-picture" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                         &times;
                                     </button>
-                                    <h4 class="modal-title" id="bsmd-title-picture">图片</h4>
+                                    <h4 class="modal-title">图片</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal" role="form">
-                                        <div class="form-group">
-                                            <label for="bsmd-picture-title" class="col-sm-2 control-label">标题：</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="bsmd-picture-title" placeholder="标题">
-                                            </div>
+                                    <div class="form-group">
+                                        <label for="bsmd-picture-title" class="col-sm-2 control-label">标题：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="title" class="form-control" id="bsmd-picture-title" placeholder="标题">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="bsmd-picture-url" class="col-sm-2 control-label">网址：</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" value="http://" class="form-control" id="bsmd-picture-url" placeholder="网址">
-                                            </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bsmd-picture-url" class="col-sm-2 control-label">网址：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="url" value="http://" class="form-control" id="bsmd-picture-url" placeholder="网址">
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">
                                         关闭
                                     </button>
-                                    <button type="button" class="btn btn-primary bsmd-btn-picture">
+                                    <button type="submit" class="btn btn-primary">
                                         确定
                                     </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default bsmd-btn-ol" title="有序列表">
@@ -272,11 +268,13 @@
 					editor.focus();
 				});
 
-				$('#bsmd .bsmd-btn-link').click(function() {
+				$('#bsmd form.bsmd-form-link').submit(function() {
 					//链接
-					addText(editor, '[' + $('#bsmd-link-title').val() + '](' + $('#bsmd-link-url').val() + ' "' + $('#bsmd-link-title').val() + '")');
-					$('#bsmd-modal-link').modal('hide');
+					var lform = $(this)[0];
+					addText(editor, '[' + lform.title.value + '](' + lform.url.value + ' "' + lform.title.value + '")');
+					$(this).modal('hide');
 					editor.focus();
+					return false;
 				});
 
 				$('#bsmd .bsmd-btn-quote').click(function() {
@@ -286,7 +284,7 @@
 					editor.focus();
 				});
 
-				$('a.bsmd-code').each(function(index) {
+				$('#bsmd a.bsmd-code').each(function(index) {
 					//代码
 					$(this).click(function() {
 						var lang = $(this).attr('lang');
@@ -304,11 +302,13 @@
 					});
 				});
 
-				$('#bsmd .bsmd-btn-picture').click(function() {
+				$('#bsmd form.bsmd-form-picture').submit(function() {
 					//图片
-					addText(editor, '![Alt ' + $('#bsmd-picture-title').val() + '](' + $('#bsmd-picture-url').val() + ' "' + $('#bsmd-picture-title').val() + '")');
-					$('#bsmd-modal-picture').modal('hide');
+					var pform = $(this)[0];
+					addText(editor, '![Alt ' + pform.title.value + '](' + pform.url.value + ' "' + pform.title.value + '")');
+					$(this).modal('hide');
 					editor.focus();
+					return false;
 				});
 
 				$('#bsmd .bsmd-btn-ol').click(function() {
@@ -325,7 +325,7 @@
 					editor.focus();
 				});
 
-				$('a.bsmd-header').each(function(index) {
+				$('#bsmd a.bsmd-header').each(function(index) {
 					//标题
 					$(this).click(function() {
 						var c = '';
