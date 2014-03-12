@@ -25,6 +25,18 @@
 				font-family: arial, sans-serif;
 				font-weight: bold;
 			}
+
+			.bsmd {
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+
+			.bsmd-editor, .bsmd-preview {
+				width: 50%;
+				height: 100%;
+				float: left;
+			}
         </style>
     </head>
 
@@ -32,8 +44,10 @@
         <div style="width: 100%; height: 300px; float: left;">
             <textarea id="bsmd">123</textarea>
         </div>
-        <div style="width: 100%; height: 300px; float: left;">
-            <div id="bsmd1">456</div>
+        <div style="width: 100%; height: 300px; float: left; margin-top: 50px;">
+            <div id="bsmd1">
+                456
+            </div>
         </div>
         <!--[if lt IE 9]>
         <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
@@ -48,7 +62,9 @@
         <script type="text/javascript">
 			$(function() {
 				$('#bsmd').bsmd();
-				$('#bsmd1').bsmd();
+				$('#bsmd1').bsmd({
+					preview : false
+				});
 			});
         </script>
     </body>

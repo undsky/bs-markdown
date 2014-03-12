@@ -1,27 +1,17 @@
 (function($) {
 	/**
+	 *bs-markdown
 	 *
-	 * @param {preview} none | embed | left | right | bottom
+	 * @param {toolbar}
+	 * @param {theme}
+	 * @param {preview} true | false
 	 */
 
 	$.fn.bsmd = function(options) {
 		var settings = $.extend($.fn.bsmd.defaults, options);
 
-		switch(settings.preview) {
-			case 'embed':
-				break;
-			case 'left':
-				break;
-			case 'right':
-				break;
-			case 'bottom':
-				break;
-			default:
-				break;
-		}
-
 		var id = 'bsmd-' + (new Date).getTime();
-		$('<div style="position:relative; width: 100%; height: 100%;" id="' + id + '"><div class="btn-toolbar" role="toolbar"></div><div class="bsmd-editor"></div>' + (settings.preview ? '<div class="bsmd-preview"></div></div>' : '')).insertAfter($(this));
+		$('<div class="bsmd" id="' + id + '"><div class="btn-toolbar" role="toolbar"></div><div class="bsmd-editor"></div>' + (settings.preview ? '<div class="bsmd-preview"></div>' : '') + '</div>').insertAfter($(this));
 		var mdText = $(this).is('textarea') ? $(this).val() : $(this).html();
 		$(this).remove();
 
@@ -50,6 +40,11 @@
 						break;
 					case 'link':
 						btnGroup.append(themeFormat(settings.theme.link, id));
+						$('#' + id + ' form.bsmd-form-link').on('show.bs.modal', function(e) {
+							var lform = $(this)[0];
+							lform.title.value = '';
+							lform.url.value = 'http://';
+						});
 						$('#' + id + ' form.bsmd-form-link').submit(function() {
 							//链接
 							var lform = $(this)[0];
@@ -90,6 +85,11 @@
 						break;
 					case 'picture':
 						btnGroup.append(themeFormat(settings.theme.picture, id));
+						$('#' + id + ' form.bsmd-form-picture').on('show.bs.modal', function(e) {
+							var pform = $(this)[0];
+							pform.title.value = '';
+							pform.url.value = 'http://';
+						});
 						$('#' + id + ' form.bsmd-form-picture').submit(function() {
 							//图片
 							var pform = $(this)[0];
@@ -168,23 +168,7 @@
 		editor.setTheme('ace/theme/chrome');
 		editor.getSession().setMode('ace/mode/markdown');
 
-		$('.bsmd-editor').css({
-			"position" : "absolute",
-			"top" : "40px",
-			"right" : "50%",
-			"bottom" : 0,
-			"left" : 0
-		});
-
 		if (settings.preview) {
-			$('.bsmd-preview').css({
-				"position" : "absolute",
-				"top" : "40px",
-				"right" : 0,
-				"bottom" : 0,
-				"left" : "50%"
-			});
-
 			editor.on('change', function(e) {
 				$('#' + id + ' .bsmd-preview').html(marked(editor.getValue()));
 			});
@@ -246,6 +230,6 @@
 			undo : '<button type="button" class="btn btn-default bsmd-btn-undo" title="撤消"><i class="fa fa-undo"></i></button>',
 			redo : '<button type="button" class="btn btn-default bsmd-btn-redo" title="重置"><i class="fa fa-repeat"></i></button>',
 		},
-		preview : 'none'
+		preview : true
 	};
 })(jQuery);
