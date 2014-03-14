@@ -182,7 +182,7 @@
 	function addLine(editor, num) {
 		for (var i = 0; i < num; i++) {
 			editor.getSession().getDocument().insertNewLine(editor.getSelection().getCursor());
-		};
+		}
 	}
 
 	function addText(editor, text) {
