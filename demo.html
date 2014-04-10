@@ -56,23 +56,17 @@
         <script type="text/javascript" src="js/bs-markdown.js"></script>
         <script type="text/javascript">
 			$(function() {
-				var bsmd = $('#bsmd').bsmd({
-					toolbar : [{
-						group : ['getValue', 'test']
-					}],
-					theme : {
-						getValue : '<button type="button" class="btn btn-default bsmd-btn-getValue" title="getValue">getValue</button>',
-						test : '<button type="button" class="btn btn-default bsmd-btn-test" title="getValue">getValue</button>'
-					},
-					method : {
-						getValue : function(editor) {
-							alert(editor.getValue());
-						},
-						test : function() {
-							alert('t');
-						}
+				$.fn.bsmd.defaults.toolbar.push([{
+					name : 'getValue',
+					theme : '<button type="button" class="btn btn-default bsmd-btn-getValue" title="getValue">getValue</button>',
+					callback : function(s, e) {
+						s.on('click', function() {
+							alert(e.getValue());
+						});
 					}
-				});
+				}]);
+
+				$('#bsmd').bsmd();
 			});
         </script>
     </body>
