@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+        Remove this if you use the .htaccess -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title>base-codeMirror</title>
+        <meta name="description" content="">
+        <meta name="author" content="jyx">
+
+        <meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+        <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+        <link href="http://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="http://cdn.bootcss.com/codemirror/4.0.3/codemirror.min.css" rel="stylesheet">
+        <style type="text/css">
+			.fa-header:before {
+				content: 'H';
+				font-family: arial, sans-serif;
+				font-weight: bold;
+			}
+
+			#bsmd {
+				width: 100%;
+				height: 100%;
+			}
+
+			#bsmd .bsmd-editor, #bsmd .bsmd-preview {
+				position: absolute;
+				top: 40px;
+				bottom: 0;
+				left: 0;
+				right: 0;
+			}
+
+			#bsmd .CodeMirror {
+				height: auto;
+			}
+        </style>
+    </head>
+
+    <body>
+        <div id="bsmd">
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-bold" title="粗体">
+                        <i class="fa fa-bold"></i>
+                    </button>
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-italic" title="斜体">
+                        <i class="fa fa-italic"></i>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default bsmd-btn" title="链接" data-toggle="modal" data-target="#bsmd-modal-link">
+                        <i class="fa fa-link"></i>
+                    </button>
+                    <form class="form-horizontal bsmd-form-link modal fade" id="bsmd-modal-link" role="dialog" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title">链接</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="bsmd-link-title" class="col-sm-2 control-label">标题：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="title" class="form-control" id="bsmd-link-title" placeholder="标题">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bsmd-link-url" class="col-sm-2 control-label">网址：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="url" value="http://" class="form-control" id="bsmd-link-url" placeholder="网址">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        关闭
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        确定
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-quote" title="引用">
+                        <i class="fa fa-quote-left"></i>
+                    </button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default bsmd-btn dropdown-toggle" data-toggle="dropdown" title="代码">
+                            <i class="fa fa-code"></i>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a lang="none" class="bsmd-code" href="javascript:void(0);">片段</a>
+                            </li>
+                            <li>
+                                <a lang="html" class="bsmd-code" href="javascript:void(0);">html</a>
+                            </li>
+                            <li>
+                                <a lang="css" class="bsmd-code" href="javascript:void(0);">css</a>
+                            </li>
+                            <li>
+                                <a lang="javascript" class="bsmd-code" href="javascript:void(0);">javascript</a>
+                            </li>
+                            <li>
+                                <a lang="markdown" class="bsmd-code" href="javascript:void(0);">markdown</a>
+                            </li>
+                            <li>
+                                <a lang="php" class="bsmd-code" href="javascript:void(0);">php</a>
+                            </li>
+                            <li>
+                                <a lang="csharp" class="bsmd-code" href="javascript:void(0);">c#</a>
+                            </li>
+                            <li>
+                                <a lang="velocity" class="bsmd-code" href="javascript:void(0);">velocity</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn btn-default bsmd-btn" title="图片" data-toggle="modal" data-target="#bsmd-modal-picture">
+                        <i class="fa fa-picture-o"></i>
+                    </button>
+                    <form class="form-horizontal bsmd-form-picture modal fade" id="bsmd-modal-picture" role="dialog" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title">图片</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="bsmd-picture-title" class="col-sm-2 control-label">标题：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="title" class="form-control" id="bsmd-picture-title" placeholder="标题">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bsmd-picture-url" class="col-sm-2 control-label">网址：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="url" value="http://" class="form-control" id="bsmd-picture-url" placeholder="网址">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        关闭
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        确定
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-ol" title="有序列表">
+                        <i class="fa fa-list-ol"></i>
+                    </button>
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-ul" title="无序列表">
+                        <i class="fa fa-list-ul"></i>
+                    </button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default bsmd-btn dropdown-toggle" data-toggle="dropdown" title="标题">
+                            <i class="fa fa-header"></i>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="bsmd-header" href="javascript:void(0);"><i class="fa fa-header"></i>1</a>
+                            </li>
+                            <li>
+                                <a class="bsmd-header" href="javascript:void(0);"><i class="fa fa-header"></i>2</a>
+                            </li>
+                            <li>
+                                <a class="bsmd-header" href="javascript:void(0);"><i class="fa fa-header"></i>3</a>
+                            </li>
+                            <li>
+                                <a class="bsmd-header" href="javascript:void(0);"><i class="fa fa-header"></i>4</a>
+                            </li>
+                            <li>
+                                <a class="bsmd-header" href="javascript:void(0);"><i class="fa fa-header"></i>5</a>
+                            </li>
+                            <li>
+                                <a class="bsmd-header" href="javascript:void(0);"><i class="fa fa-header"></i>6</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-ellipsis" title="分割线">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-undo" title="撤消">
+                        <i class="fa fa-undo"></i>
+                    </button>
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-redo" title="恢复">
+                        <i class="fa fa-repeat"></i>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default bsmd-btn-eye" title="预览">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="bsmd-editor"></div>
+            <div class="bsmd-preview" style="display: none;"></div>
+        </div>
+        <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+        <![endif]-->
+        <!--[if gte IE 9]><!-->
+        <script src="http://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+        <!--<![endif]-->
+        <script src="http://cdn.bootcss.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://cdn.bootcss.com/codemirror/4.0.3/codemirror.min.js"></script>
+        <script src="http://cdn.bootcss.com/codemirror/4.0.3/mode/markdown/markdown.min.js"></script>
+        <script type="text/javascript" src="js/marked.js"></script>
+        <script type="text/javascript">
+			var editor = CodeMirror($('#bsmd .bsmd-editor')[0], {
+				lineNumbers : true,
+				mode : 'markdown'
+			});
+
+			$(function() {
+				$('#bsmd .bsmd-btn-bold').click(function() {
+					//粗体
+				});
+
+				$('#bsmd .bsmd-btn-italic').click(function() {
+					//斜体
+				});
+
+				$('#bsmd form.bsmd-form-link').submit(function() {
+					//链接
+					return false;
+				});
+
+				$('#bsmd .bsmd-btn-quote').click(function() {
+					//引用
+				});
+
+				$('#bsmd a.bsmd-code').each(function(index) {
+					//代码
+					$(this).click(function() {
+						var lang = $(this).attr('lang');
+						if ('none' == lang) {
+						} else {
+						}
+					});
+				});
+
+				$('#bsmd form.bsmd-form-picture').submit(function() {
+					//图片
+					return false;
+				});
+
+				$('#bsmd .bsmd-btn-ol').click(function() {
+					//有序列表
+				});
+
+				$('#bsmd .bsmd-btn-ul').click(function() {
+					//无序列表
+				});
+
+				$('#bsmd a.bsmd-header').each(function(index) {
+					//标题
+					$(this).click(function() {
+					});
+				});
+
+				$('#bsmd .bsmd-btn-ellipsis').click(function() {
+					//分割线
+				});
+
+				$('#bsmd .bsmd-btn-undo').click(function() {
+					//撤消
+					editor.undo();
+				});
+
+				$('#bsmd .bsmd-btn-redo').click(function() {
+					//恢复
+					editor.redo();
+				});
+
+				$('#bsmd .bsmd-btn-eye').click(function() {
+					//预览
+					$(this).toggleClass('active');
+					if ($(this).hasClass('active')) {
+						$('#bsmd .bsmd-editor').hide();
+						$('#bsmd .bsmd-preview').show().html(marked(editor.getValue()));
+						$('#bsmd .bsmd-btn').addClass('disabled');
+					} else {
+						$('#bsmd .bsmd-editor').show();
+						$('#bsmd .bsmd-preview').hide();
+						$('#bsmd .bsmd-btn').removeClass('disabled');
+					}
+				});
+			});
+        </script>
+    </body>
+</html>

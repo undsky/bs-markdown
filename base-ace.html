@@ -7,7 +7,7 @@
         Remove this if you use the .htaccess -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-        <title>base</title>
+        <title>base-ace</title>
         <meta name="description" content="">
         <meta name="author" content="jyx">
 
@@ -31,20 +31,12 @@
 				height: 100%;
 			}
 
-			#bsmd .bsmd-editor {
+			#bsmd .bsmd-editor, #bsmd .bsmd-preview {
 				position: absolute;
 				top: 40px;
-				right: 50%;
 				bottom: 0;
 				left: 0;
-			}
-
-			#bsmd .bsmd-preview {
-				position: absolute;
-				top: 40px;
 				right: 0;
-				bottom: 0;
-				left: 50%;
 			}
         </style>
     </head>
@@ -53,15 +45,15 @@
         <div id="bsmd">
             <div class="btn-toolbar" role="toolbar">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default bsmd-btn-bold" title="粗体">
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-bold" title="粗体">
                         <i class="fa fa-bold"></i>
                     </button>
-                    <button type="button" class="btn btn-default bsmd-btn-italic" title="斜体">
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-italic" title="斜体">
                         <i class="fa fa-italic"></i>
                     </button>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default" title="链接" data-toggle="modal" data-target="#bsmd-modal-link">
+                    <button type="button" class="btn btn-default bsmd-btn" title="链接" data-toggle="modal" data-target="#bsmd-modal-link">
                         <i class="fa fa-link"></i>
                     </button>
                     <form class="form-horizontal bsmd-form-link modal fade" id="bsmd-modal-link" role="dialog" tabindex="-1">
@@ -98,11 +90,11 @@
                             </div>
                         </div>
                     </form>
-                    <button type="button" class="btn btn-default bsmd-btn-quote" title="引用">
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-quote" title="引用">
                         <i class="fa fa-quote-left"></i>
                     </button>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="代码">
+                        <button type="button" class="btn btn-default bsmd-btn dropdown-toggle" data-toggle="dropdown" title="代码">
                             <i class="fa fa-code"></i>
                             <span class="caret"></span>
                         </button>
@@ -133,7 +125,7 @@
                             </li>
                         </ul>
                     </div>
-                    <button type="button" class="btn btn-default" title="图片" data-toggle="modal" data-target="#bsmd-modal-picture">
+                    <button type="button" class="btn btn-default bsmd-btn" title="图片" data-toggle="modal" data-target="#bsmd-modal-picture">
                         <i class="fa fa-picture-o"></i>
                     </button>
                     <form class="form-horizontal bsmd-form-picture modal fade" id="bsmd-modal-picture" role="dialog" tabindex="-1">
@@ -172,14 +164,14 @@
                     </form>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default bsmd-btn-ol" title="有序列表">
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-ol" title="有序列表">
                         <i class="fa fa-list-ol"></i>
                     </button>
-                    <button type="button" class="btn btn-default bsmd-btn-ul" title="无序列表">
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-ul" title="无序列表">
                         <i class="fa fa-list-ul"></i>
                     </button>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="标题">
+                        <button type="button" class="btn btn-default bsmd-btn dropdown-toggle" data-toggle="dropdown" title="标题">
                             <i class="fa fa-header"></i>
                             <span class="caret"></span>
                         </button>
@@ -204,15 +196,15 @@
                             </li>
                         </ul>
                     </div>
-                    <button type="button" class="btn btn-default bsmd-btn-ellipsis" title="分割线">
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-ellipsis" title="分割线">
                         <i class="fa fa-ellipsis-h"></i>
                     </button>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default bsmd-btn-undo" title="撤消">
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-undo" title="撤消">
                         <i class="fa fa-undo"></i>
                     </button>
-                    <button type="button" class="btn btn-default bsmd-btn-redo" title="重置">
+                    <button type="button" class="btn btn-default bsmd-btn bsmd-btn-redo" title="恢复">
                         <i class="fa fa-repeat"></i>
                     </button>
                 </div>
@@ -223,7 +215,7 @@
                 </div>
             </div>
             <div class="bsmd-editor"></div>
-            <div class="bsmd-preview"></div>
+            <div class="bsmd-preview" style="display: none;"></div>
         </div>
         <!--[if lt IE 9]>
         <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
@@ -238,9 +230,9 @@
 			var editor = ace.edit($('#bsmd .bsmd-editor')[0]);
 			editor.setTheme('ace/theme/chrome');
 			editor.getSession().setMode('ace/mode/markdown');
-			editor.on('change', function(e) {
-				$('#bsmd .bsmd-preview').html(marked(editor.getValue()));
-			});
+			// editor.on('change', function(e) {
+			// $('#bsmd .bsmd-preview').html(marked(editor.getValue()));
+			// });
 
 			function addLine(editor, num) {
 				for (var i = 0; i < num; i++) {
@@ -252,7 +244,7 @@
 				editor.getSession().getDocument().insertInLine(editor.getSelection().getCursor(), text);
 			}
 
-			function reText(editor, from, to) {
+			function selText(editor, from, to) {
 				var p = editor.getSelection().getCursor();
 				editor.gotoLine(p.row + 1, p.column - from, false);
 				editor.getSelection().selectTo(p.row, p.column - to);
@@ -262,14 +254,14 @@
 				$('#bsmd .bsmd-btn-bold').click(function() {
 					//粗体
 					addText(editor, '**粗体**');
-					reText(editor, 2, 4);
+					selText(editor, 2, 4);
 					editor.focus();
 				});
 
 				$('#bsmd .bsmd-btn-italic').click(function() {
 					//斜体
 					addText(editor, '*斜体*');
-					reText(editor, 1, 3);
+					selText(editor, 1, 3);
 					editor.focus();
 				});
 
@@ -295,7 +287,7 @@
 						var lang = $(this).attr('lang');
 						if ('none' == lang) {
 							addText(editor, '`代码`');
-							reText(editor, 1, 3);
+							selText(editor, 1, 3);
 						} else {
 							addLine(editor, 2);
 							addText(editor, '```' + lang);
@@ -340,7 +332,7 @@
 						};
 
 						addText(editor, c + (index + 1) + '级标题' + c);
-						reText(editor, index + 1, index + 5);
+						selText(editor, index + 1, index + 5);
 						editor.focus();
 					});
 				});
@@ -359,8 +351,22 @@
 				});
 
 				$('#bsmd .bsmd-btn-redo').click(function() {
-					//重置
+					//恢复
 					editor.redo();
+				});
+
+				$('#bsmd .bsmd-btn-eye').click(function() {
+					//预览
+					$(this).toggleClass('active');
+					if ($(this).hasClass('active')) {
+						$('#bsmd .bsmd-editor').hide();
+						$('#bsmd .bsmd-preview').show().html(marked(editor.getValue()));
+						$('#bsmd .bsmd-btn').addClass('disabled');
+					} else {
+						$('#bsmd .bsmd-editor').show();
+						$('#bsmd .bsmd-preview').hide();
+						$('#bsmd .bsmd-btn').removeClass('disabled');
+					}
 				});
 			});
         </script>
