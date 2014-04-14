@@ -265,10 +265,16 @@
 					editor.focus();
 				});
 
+				$('#bsmd form.bsmd-form-link').on('show.bs.modal', function(e) {
+					var f = $(this)[0];
+					f.title.value = '';
+					f.url.value = 'http://';
+				});
+
 				$('#bsmd form.bsmd-form-link').submit(function() {
 					//链接
-					var lform = $(this)[0];
-					addText(editor, '[' + lform.title.value + '](' + lform.url.value + ' "' + lform.title.value + '")');
+					var f = $(this)[0];
+					addText(editor, '[' + f.title.value + '](' + f.url.value + ' "' + f.title.value + '")');
 					$(this).modal('hide');
 					editor.focus();
 					return false;
@@ -299,10 +305,16 @@
 					});
 				});
 
+				$('#bsmd form.bsmd-form-picture').on('show.bs.modal', function(e) {
+					var f = $(this)[0];
+					f.title.value = '';
+					f.url.value = 'http://';
+				});
+
 				$('#bsmd form.bsmd-form-picture').submit(function() {
 					//图片
-					var pform = $(this)[0];
-					addText(editor, '![Alt ' + pform.title.value + '](' + pform.url.value + ' "' + pform.title.value + '")');
+					var f = $(this)[0];
+					addText(editor, '![Alt ' + f.title.value + '](' + f.url.value + ' "' + f.title.value + '")');
 					$(this).modal('hide');
 					editor.focus();
 					return false;

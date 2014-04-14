@@ -238,22 +238,62 @@
 				mode : 'markdown'
 			});
 
+			function addLine(editor, num) {
+				for (var i = 0; i < num; i++) {
+					editor.execCommand('newlineAndIndent');
+				};
+			}
+
+			function addText(editor, text) {
+				editor.replaceRange(text, editor.getCursor());
+			}
+
+			function selText(editor, from, to) {
+				var p = editor.getCursor();
+				editor.extendSelection({
+					line : p.line,
+					ch : p.ch - from
+				}, {
+					line : p.line,
+					ch : p.ch - to
+				});
+			}
+
 			$(function() {
 				$('#bsmd .bsmd-btn-bold').click(function() {
 					//粗体
+					addText(editor, '**粗体**');
+					selText(editor, 2, 4);
+					editor.focus();
 				});
 
 				$('#bsmd .bsmd-btn-italic').click(function() {
 					//斜体
+					addText(editor, '*斜体*');
+					selText(editor, 1, 3);
+					editor.focus();
+				});
+
+				$('#bsmd form.bsmd-form-link').on('show.bs.modal', function(e) {
+					var f = $(this)[0];
+					f.title.value = '';
+					f.url.value = 'http://';
 				});
 
 				$('#bsmd form.bsmd-form-link').submit(function() {
 					//链接
+					var f = $(this)[0];
+					addText(editor, '[' + f.title.value + '](' + f.url.value + ' "' + f.title.value + '")');
+					$(this).modal('hide');
+					editor.focus();
 					return false;
 				});
 
 				$('#bsmd .bsmd-btn-quote').click(function() {
 					//引用
+					addLine(editor, 2);
+					addText(editor, '>');
+					editor.focus();
 				});
 
 				$('#bsmd a.bsmd-code').each(function(index) {
@@ -261,32 +301,69 @@
 					$(this).click(function() {
 						var lang = $(this).attr('lang');
 						if ('none' == lang) {
+							addText(editor, '`代码`');
+							selText(editor, 1, 3);
 						} else {
+							addLine(editor, 2);
+							addText(editor, '```' + lang);
+							addLine(editor, 2);
+							addText(editor, '```');
+							editor.execCommand('goLineUp');
 						}
+						editor.focus();
 					});
+				});
+
+				$('#bsmd form.bsmd-form-picture').on('show.bs.modal', function(e) {
+					var f = $(this)[0];
+					f.title.value = '';
+					f.url.value = 'http://';
 				});
 
 				$('#bsmd form.bsmd-form-picture').submit(function() {
 					//图片
+					var f = $(this)[0];
+					addText(editor, '![Alt ' + f.title.value + '](' + f.url.value + ' "' + f.title.value + '")');
+					$(this).modal('hide');
+					editor.focus();
 					return false;
 				});
 
 				$('#bsmd .bsmd-btn-ol').click(function() {
 					//有序列表
+					addLine(editor, 2);
+					addText(editor, '0. ');
+					editor.focus();
 				});
 
 				$('#bsmd .bsmd-btn-ul').click(function() {
 					//无序列表
+					addLine(editor, 2);
+					addText(editor, '+ ');
+					editor.focus();
 				});
 
 				$('#bsmd a.bsmd-header').each(function(index) {
 					//标题
 					$(this).click(function() {
+						var c = '';
+
+						for (var i = 0; i < (index + 1); i++) {
+							c += '#';
+						};
+
+						addText(editor, c + (index + 1) + '级标题' + c);
+						selText(editor, index + 1, index + 5);
+						editor.focus();
 					});
 				});
 
 				$('#bsmd .bsmd-btn-ellipsis').click(function() {
 					//分割线
+					addLine(editor, 2);
+					addText(editor, '-------');
+					addLine(editor, 2);
+					editor.focus();
 				});
 
 				$('#bsmd .bsmd-btn-undo').click(function() {

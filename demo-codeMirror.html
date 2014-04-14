@@ -16,9 +16,50 @@
         <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+        <link href="http://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="http://cdn.bootcss.com/codemirror/4.0.3/codemirror.min.css" rel="stylesheet">
+        <style type="text/css">
+			.fa-header:before {
+				content: 'H';
+				font-family: arial, sans-serif;
+				font-weight: bold;
+			}
+
+			.CodeMirror {
+				height: auto;
+			}
+        </style>
     </head>
 
     <body>
-        
+        <div id="bsmd"></div>
+        <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+        <![endif]-->
+        <!--[if gte IE 9]><!-->
+        <script src="http://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+        <!--<![endif]-->
+        <script src="http://cdn.bootcss.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://cdn.bootcss.com/codemirror/4.0.3/codemirror.min.js"></script>
+        <script src="http://cdn.bootcss.com/codemirror/4.0.3/mode/markdown/markdown.min.js"></script>
+        <script type="text/javascript" src="js/marked.js"></script>
+        <script type="text/javascript" src="js/bs-markdown-codeMirror.js"></script>
+        <script type="text/javascript">
+			$(function() {
+				$.fn.bsmd.defaults.toolbar.push(['getValue']);
+				$.fn.bsmd.defaults.getValue = {
+					theme : '<button type="button" class="btn btn-default bsmd-btn-getValue" title="getValue">getValue</button>',
+					callback : function(s, e) {
+						s.on('click', function() {
+							alert(e.getValue());
+						});
+					}
+				};
+
+				$('#bsmd').bsmd();
+			});
+        </script>
     </body>
 </html>

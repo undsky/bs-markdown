@@ -147,6 +147,7 @@
 					f.title.value = '';
 					f.url.value = 'http://';
 				});
+
 				s.submit(function() {
 					var f = $(this)[0];
 					addText(e, '![Alt ' + f.title.value + '](' + f.url.value + ' "' + f.title.value + '")');
