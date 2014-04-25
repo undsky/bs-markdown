@@ -51,9 +51,29 @@
 				$.fn.bsmd.defaults.toolbar.push(['getValue']);
 				$.fn.bsmd.defaults.getValue = {
 					theme : '<button type="button" class="btn btn-default bsmd-btn-getValue" title="getValue">getValue</button>',
-					callback : function(s, e) {
-						s.on('click', function() {
-							alert(e.getValue());
+					callback : function(theme, source, editor) {
+						theme.on('click', function() {
+							alert(editor.getValue());
+						});
+					}
+				};
+
+				$.fn.bsmd.defaults.preview = {
+					theme : null,
+					callback : function(theme, source, editor) {
+						$('.bsmd-editor', source).css({
+							'width' : '50%',
+							'right' : '50%'
+						});
+
+						$('.bsmd-preview', source).css({
+							'width' : '50%',
+							'left' : '50%',
+							'display' : 'block'
+						});
+
+						editor.on('change', function() {
+							$('.bsmd-preview', source).html(marked(editor.getValue()));
 						});
 					}
 				};
