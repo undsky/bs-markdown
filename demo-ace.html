@@ -45,9 +45,9 @@
 				$.fn.bsmd.defaults.toolbar.push(['getValue']);
 				$.fn.bsmd.defaults.getValue = {
 					theme : '<button type="button" class="btn btn-default bsmd-btn-getValue" title="getValue">getValue</button>',
-					callback : function(s, e) {
-						s.on('click', function() {
-							alert(e.getValue());
+					callback : function(theme, source, editor) {
+						theme.on('click', function() {
+							alert(editor.getValue());
 						});
 					}
 				};

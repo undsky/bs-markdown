@@ -46,8 +46,11 @@
         <script src="http://cdn.bootcss.com/codemirror/4.0.3/mode/markdown/markdown.min.js"></script>
         <script type="text/javascript" src="js/marked.js"></script>
         <script type="text/javascript" src="js/bs-markdown-codeMirror.js"></script>
+        <script src="http://cdn.bootcss.com/codemirror/4.0.3/addon/mode/loadmode.min.js"></script>
         <script type="text/javascript">
 			$(function() {
+				CodeMirror.modeURL = "http://cdn.bootcss.com/codemirror/4.0.3/mode/%N/%N.min.js";
+
 				$.fn.bsmd.defaults.toolbar.push(['getValue']);
 				$.fn.bsmd.defaults.getValue = {
 					theme : '<button type="button" class="btn btn-default bsmd-btn-getValue" title="getValue">getValue</button>',
@@ -74,6 +77,23 @@
 
 						editor.on('change', function() {
 							$('.bsmd-preview', source).html(marked(editor.getValue()));
+							$('.bsmd-preview', source).find('code').each(function(index) {
+								var cl = $(this).attr('class');
+								if (cl && 'lang' == cl.substring(0, 4)) {
+									var mode = cl.substring(5, cl.length);
+									var html = $(this).text();
+									$(this).text('');
+									var editor = CodeMirror($(this)[0], {
+										lineNumbers : true,
+										readOnly : true
+									});
+
+									editor.setOption('mode', mode);
+									CodeMirror.autoLoadMode(editor, 'text/x-csharp' == mode ? 'clike' : mode);
+
+									editor.setValue(html);
+								};
+							});
 						});
 					}
 				};
