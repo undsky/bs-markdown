@@ -83,15 +83,15 @@
 									var mode = cl.substring(5, cl.length);
 									var html = $(this).text();
 									$(this).text('');
-									var editor = CodeMirror($(this)[0], {
+									var cm = CodeMirror($(this)[0], {
 										lineNumbers : true,
 										readOnly : true
 									});
 
-									editor.setOption('mode', mode);
-									CodeMirror.autoLoadMode(editor, 'text/x-csharp' == mode ? 'clike' : mode);
+									cm.setOption('mode', mode);
+									CodeMirror.autoLoadMode(cm, 'text/x-csharp' == mode ? 'clike' : mode);
 
-									editor.setValue(html);
+									cm.setValue(html);
 								};
 							});
 						});

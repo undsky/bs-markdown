@@ -52,6 +52,43 @@
 					}
 				};
 
+				$.fn.bsmd.defaults.preview = {
+					theme : null,
+					callback : function(theme, source, editor) {
+						$('.bsmd-editor', source).css({
+							'width' : '50%',
+							'right' : '50%'
+						});
+
+						$('.bsmd-preview', source).css({
+							'width' : '50%',
+							'left' : '50%',
+							'display' : 'block'
+						});
+
+						editor.on('change', function() {
+							$('.bsmd-preview', source).html(marked(editor.getValue()));
+							$('.bsmd-preview', source).find('code').each(function(index) {
+								var cl = $(this).attr('class');
+								if (cl && 'lang' == cl.substring(0, 4)) {
+									var mode = cl.substring(5, cl.length);
+									var html = $.trim($(this).text());
+									$(this).parent().height($(this).height());
+									$(this).text('');
+									var aceEditor = ace.edit($(this).parent()[0]);
+
+									aceEditor.setTheme('ace/theme/chrome');
+									aceEditor.getSession().setMode('ace/mode/' + mode);
+
+									aceEditor.setValue(html);
+									aceEditor.setReadOnly(true);
+									aceEditor.clearSelection();
+								};
+							});
+						});
+					}
+				};
+
 				$('#bsmd').bsmd();
 			});
         </script>
