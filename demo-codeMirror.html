@@ -43,10 +43,9 @@
         <!--<![endif]-->
         <script src="http://cdn.bootcss.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script src="http://cdn.bootcss.com/codemirror/4.0.3/codemirror.min.js"></script>
-        <script src="http://cdn.bootcss.com/codemirror/4.0.3/mode/markdown/markdown.min.js"></script>
-        <script type="text/javascript" src="js/marked.js"></script>
-        <script type="text/javascript" src="js/bs-markdown-codeMirror.js"></script>
         <script src="http://cdn.bootcss.com/codemirror/4.0.3/addon/mode/loadmode.min.js"></script>
+        <script src="http://cdn.bootcss.com/marked/0.3.2/marked.min.js"></script>
+        <script type="text/javascript" src="js/bs-markdown-codeMirror.js"></script>
         <script type="text/javascript">
 			$(function() {
 				CodeMirror.modeURL = "http://cdn.bootcss.com/codemirror/4.0.3/mode/%N/%N.min.js";
@@ -81,7 +80,7 @@
 								var cl = $(this).attr('class');
 								if (cl && 'lang' == cl.substring(0, 4)) {
 									var mode = cl.substring(5, cl.length);
-									var html = $(this).text();
+									var code = $(this).text();
 									$(this).text('');
 									var cm = CodeMirror($(this)[0], {
 										lineNumbers : true,
@@ -89,9 +88,9 @@
 									});
 
 									cm.setOption('mode', mode);
-									CodeMirror.autoLoadMode(cm, 'text/x-csharp' == mode ? 'clike' : mode);
+									CodeMirror.autoLoadMode(cm, mode);
 
-									cm.setValue(html);
+									cm.setValue(code);
 								};
 							});
 						});

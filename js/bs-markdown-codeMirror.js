@@ -8,20 +8,24 @@
 		var settings = $.extend(true, {}, $.fn.bsmd.defaults, options);
 
 		var id = 'bsmd-' + (new Date).getTime();
-		var source = $('<div id="' + id + '" class="bsmd" style="width:100%;min-width:620px;height:100%;position:relative;"><div class="btn-toolbar" role="toolbar"></div><div class="bsmd-editor" style="position:absolute;top:40px;bottom:0;left:0;right:0;"></div><div class="bsmd-preview" style="position:absolute;top:40px;bottom:0;left:0;right:0;display:none;"></div></div>');
+		var source = $('<div id="' + id + '" class="bsmd" style="width:100%;min-width:685px;height:100%;position:relative;"><div class="btn-toolbar" role="toolbar"></div><div class="bsmd-editor" style="position:absolute;top:40px;bottom:0;left:0;right:0;"></div><div class="bsmd-preview" style="position:absolute;top:40px;bottom:0;left:0;right:0;display:none;"></div></div>');
 		source.insertAfter($(this));
 		var mdText = $(this).is('textarea') ? $(this).val() : $(this).html();
 		$(this).remove();
 
 		var editor = CodeMirror($('#' + id + ' .bsmd-editor')[0], {
-			lineNumbers : true,
-			mode : 'markdown'
+			lineNumbers : true
 		});
+		editor.setOption('mode', 'markdown');
+		if (CodeMirror.autoLoadMode)
+			CodeMirror.autoLoadMode(editor, 'markdown');
 
 		for (var i = 0; i < settings.toolbar.length; i++) {
 			var bg = $('<div class="btn-group"></div>').appendTo($('#' + id + ' .btn-toolbar'));
 			for (var j = 0; j < settings.toolbar[i].length; j++) {
 				var bt = settings[settings.toolbar[i][j]];
+				if (bt.modal)
+					$(themeFormat(bt.modal, id)).appendTo('body');
 				var theme = bt.theme ? $(themeFormat(bt.theme, id)).appendTo(bg) : null;
 				bt.callback(theme, source, editor);
 			}
@@ -92,16 +96,17 @@
 			}
 		},
 		link : {
-			theme : '<button type="button" class="btn btn-default bsmd-btn" title="链接" data-toggle="modal" data-target="#{0}-modal-link"><i class="fa fa-link"></i></button><form class="form-horizontal bsmd-form-link modal fade" id="{0}-modal-link" role="dialog" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">链接</h4></div><div class="modal-body"><div class="form-group"><label for="{0}-link-title" class="col-sm-2 control-label">标题：</label><div class="col-sm-10"><input type="text" name="title" class="form-control" id="{0}-link-title" placeholder="标题"></div></div><div class="form-group"><label for="{0}-link-url" class="col-sm-2 control-label">网址：</label><div class="col-sm-10"><input type="text" name="url" value="http://" class="form-control" id="{0}-link-url" placeholder="网址"></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button><button type="submit" class="btn btn-primary">确定</button></div></div></div></form>',
+			theme : '<button type="button" class="btn btn-default bsmd-btn" title="链接" data-toggle="modal" data-target="#{0}-modal-link"><i class="fa fa-link"></i></button>',
+			modal : '<form class="form-horizontal bsmd-form-link modal fade" id="{0}-modal-link" role="dialog" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">链接</h4></div><div class="modal-body"><div class="form-group"><label for="{0}-link-title" class="col-sm-2 control-label">标题：</label><div class="col-sm-10"><input type="text" name="title" class="form-control" id="{0}-link-title" placeholder="标题"></div></div><div class="form-group"><label for="{0}-link-url" class="col-sm-2 control-label">网址：</label><div class="col-sm-10"><input type="text" name="url" value="http://" class="form-control" id="{0}-link-url" placeholder="网址"></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button><button type="submit" class="btn btn-primary">确定</button></div></div></div></form>',
 			callback : function(theme, source, editor) {
 				//链接
-				theme.on('show.bs.modal', function(e) {
+				$(theme.attr('data-target')).on('show.bs.modal', function(e) {
 					var f = $(this)[0];
 					f.title.value = '';
 					f.url.value = 'http://';
 				});
 
-				theme.on('submit', function() {
+				$(theme.attr('data-target')).on('submit', function() {
 					var f = $(this)[0];
 					addText(editor, '[' + f.title.value + '](' + f.url.value + ' "' + f.title.value + '")');
 					$(this).modal('hide');
@@ -122,7 +127,7 @@
 			}
 		},
 		code : {
-			theme : '<div class="btn-group"><button type="button" class="btn btn-default bsmd-btn dropdown-toggle" data-toggle="dropdown" title="代码"><i class="fa fa-code"></i><span class="caret"></span></button><ul class="dropdown-menu"><li><a lang="none" class="bsmd-code" href="javascript:void(0);">片段</a></li><li><a lang="htmlmixed" class="bsmd-code" href="javascript:void(0);">html</a></li><li><a lang="css" class="bsmd-code" href="javascript:void(0);">css</a></li><li><a lang="javascript" class="bsmd-code" href="javascript:void(0);">javascript</a></li><li><a lang="markdown" class="bsmd-code" href="javascript:void(0);">markdown</a></li><li><a lang="php" class="bsmd-code" href="javascript:void(0);">php</a></li><li><a lang="text/x-csharp" class="bsmd-code" href="javascript:void(0);">c#</a></li><li><a lang="velocity" class="bsmd-code" href="javascript:void(0);">velocity</a></li></ul></div>',
+			theme : '<div class="btn-group"><button type="button" class="btn btn-default bsmd-btn dropdown-toggle" data-toggle="dropdown" title="代码"><i class="fa fa-code"></i><span class="caret"></span></button><ul class="dropdown-menu"><li><a lang="none" class="bsmd-code" href="javascript:void(0);">片段</a></li><li><a lang="htmlmixed" class="bsmd-code" href="javascript:void(0);">html</a></li><li><a lang="css" class="bsmd-code" href="javascript:void(0);">css</a></li><li><a lang="javascript" class="bsmd-code" href="javascript:void(0);">javascript</a></li><li><a lang="markdown" class="bsmd-code" href="javascript:void(0);">markdown</a></li><li><a lang="php" class="bsmd-code" href="javascript:void(0);">php</a></li><li><a lang="clike" class="bsmd-code" href="javascript:void(0);">c#</a></li><li><a lang="velocity" class="bsmd-code" href="javascript:void(0);">velocity</a></li></ul></div>',
 			callback : function(theme, source, editor) {
 				$('a.bsmd-code', theme).each(function(index) {
 					//代码
@@ -144,16 +149,17 @@
 			}
 		},
 		picture : {
-			theme : '<button type="button" class="btn btn-default bsmd-btn" title="图片" data-toggle="modal" data-target="#{0}-modal-picture"><i class="fa fa-picture-o"></i></button><form class="form-horizontal bsmd-form-picture modal fade" id="{0}-modal-picture" role="dialog" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">图片</h4></div><div class="modal-body"><div class="form-group"><label for="{0}-picture-title" class="col-sm-2 control-label">标题：</label><div class="col-sm-10"><input type="text" name="title" class="form-control" id="{0}-picture-title" placeholder="标题"></div></div><div class="form-group"><label for="{0}-picture-url" class="col-sm-2 control-label">网址：</label><div class="col-sm-10"><input type="text" name="url" value="http://" class="form-control" id="{0}-picture-url" placeholder="网址"></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button><button type="submit" class="btn btn-primary">确定</button></div></div></div></form>',
+			theme : '<button type="button" class="btn btn-default bsmd-btn" title="图片" data-toggle="modal" data-target="#{0}-modal-picture"><i class="fa fa-picture-o"></i></button>',
+			modal : '<form class="form-horizontal bsmd-form-picture modal fade" id="{0}-modal-picture" role="dialog" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">图片</h4></div><div class="modal-body"><div class="form-group"><label for="{0}-picture-title" class="col-sm-2 control-label">标题：</label><div class="col-sm-10"><input type="text" name="title" class="form-control" id="{0}-picture-title" placeholder="标题"></div></div><div class="form-group"><label for="{0}-picture-url" class="col-sm-2 control-label">网址：</label><div class="col-sm-10"><input type="text" name="url" value="http://" class="form-control" id="{0}-picture-url" placeholder="网址"></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button><button type="submit" class="btn btn-primary">确定</button></div></div></div></form>',
 			callback : function(theme, source, editor) {
 				//图片
-				theme.on('show.bs.modal', function(e) {
+				$(theme.attr('data-target')).on('show.bs.modal', function(e) {
 					var f = $(this)[0];
 					f.title.value = '';
 					f.url.value = 'http://';
 				});
 
-				theme.on('submit', function() {
+				$(theme.attr('data-target')).on('submit', function() {
 					var f = $(this)[0];
 					addText(editor, '![Alt ' + f.title.value + '](' + f.url.value + ' "' + f.title.value + '")');
 					$(this).modal('hide');
@@ -239,8 +245,8 @@
 				//预览
 				theme.on('click', function() {
 					$(this).toggleClass('active');
-					$('.bsmd-editor', source).toggle();
-					$('.bsmd-preview', source).toggle(function() {
+					$('.bsmd-editor', source).toggle('fast');
+					$('.bsmd-preview', source).toggle('fast', function() {
 						if ($(this).is(':visible'))
 							$(this).html(marked(editor.getValue()));
 					});

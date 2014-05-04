@@ -9,7 +9,7 @@
 		var settings = $.extend(true, {}, $.fn.bsmd.defaults, options);
 
 		var id = 'bsmd-' + (new Date).getTime();
-		var source = $('<div id="' + id + '" class="bsmd" style="width:100%;min-width:620px;height:100%;"><div class="btn-toolbar" role="toolbar"></div><div class="bsmd-editor" style="position:absolute;top:40px;bottom:0;left:0;right:0;"></div><div class="bsmd-preview" style="position:absolute;top:40px;bottom:0;left:0;right:0;display:none;"></div></div>');
+		var source = $('<div id="' + id + '" class="bsmd" style="width:100%;min-width:685px;height:100%;"><div class="btn-toolbar" role="toolbar"></div><div class="bsmd-editor" style="position:absolute;top:40px;bottom:0;left:0;right:0;"></div><div class="bsmd-preview" style="position:absolute;top:40px;bottom:0;left:0;right:0;display:none;"></div></div>');
 		source.insertAfter($(this));
 		var mdText = $(this).is('textarea') ? $(this).val() : $(this).html();
 		$(this).remove();
@@ -20,6 +20,8 @@
 			var bg = $('<div class="btn-group"></div>').appendTo($('#' + id + ' .btn-toolbar'));
 			for (var j = 0; j < settings.toolbar[i].length; j++) {
 				var bt = settings[settings.toolbar[i][j]];
+				if (bt.modal)
+					$(themeFormat(bt.modal, id)).appendTo('body');
 				var theme = bt.theme ? $(themeFormat(bt.theme, id)).appendTo(bg) : null;
 				bt.callback(theme, source, editor);
 			}
@@ -88,16 +90,17 @@
 			}
 		},
 		link : {
-			theme : '<button type="button" class="btn btn-default bsmd-btn" title="链接" data-toggle="modal" data-target="#{0}-modal-link"><i class="fa fa-link"></i></button><form class="form-horizontal bsmd-form-link modal fade" id="{0}-modal-link" role="dialog" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">链接</h4></div><div class="modal-body"><div class="form-group"><label for="{0}-link-title" class="col-sm-2 control-label">标题：</label><div class="col-sm-10"><input type="text" name="title" class="form-control" id="{0}-link-title" placeholder="标题"></div></div><div class="form-group"><label for="{0}-link-url" class="col-sm-2 control-label">网址：</label><div class="col-sm-10"><input type="text" name="url" value="http://" class="form-control" id="{0}-link-url" placeholder="网址"></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button><button type="submit" class="btn btn-primary">确定</button></div></div></div></form>',
+			theme : '<button type="button" class="btn btn-default bsmd-btn" title="链接" data-toggle="modal" data-target="#{0}-modal-link"><i class="fa fa-link"></i></button>',
+			modal : '<form class="form-horizontal bsmd-form-link modal fade" id="{0}-modal-link" role="dialog" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">链接</h4></div><div class="modal-body"><div class="form-group"><label for="{0}-link-title" class="col-sm-2 control-label">标题：</label><div class="col-sm-10"><input type="text" name="title" class="form-control" id="{0}-link-title" placeholder="标题"></div></div><div class="form-group"><label for="{0}-link-url" class="col-sm-2 control-label">网址：</label><div class="col-sm-10"><input type="text" name="url" value="http://" class="form-control" id="{0}-link-url" placeholder="网址"></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button><button type="submit" class="btn btn-primary">确定</button></div></div></div></form>',
 			callback : function(theme, source, editor) {
 				//链接
-				theme.on('show.bs.modal', function(e) {
+				$(theme.attr('data-target')).on('show.bs.modal', function(e) {
 					var f = $(this)[0];
 					f.title.value = '';
 					f.url.value = 'http://';
 				});
 
-				theme.on('submit', function() {
+				$(theme.attr('data-target')).on('submit', function() {
 					var f = $(this)[0];
 					addText(editor, '[' + f.title.value + '](' + f.url.value + ' "' + f.title.value + '")');
 					$(this).modal('hide');
@@ -140,16 +143,17 @@
 			}
 		},
 		picture : {
-			theme : '<button type="button" class="btn btn-default bsmd-btn" title="图片" data-toggle="modal" data-target="#{0}-modal-picture"><i class="fa fa-picture-o"></i></button><form class="form-horizontal bsmd-form-picture modal fade" id="{0}-modal-picture" role="dialog" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">图片</h4></div><div class="modal-body"><div class="form-group"><label for="{0}-picture-title" class="col-sm-2 control-label">标题：</label><div class="col-sm-10"><input type="text" name="title" class="form-control" id="{0}-picture-title" placeholder="标题"></div></div><div class="form-group"><label for="{0}-picture-url" class="col-sm-2 control-label">网址：</label><div class="col-sm-10"><input type="text" name="url" value="http://" class="form-control" id="{0}-picture-url" placeholder="网址"></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button><button type="submit" class="btn btn-primary">确定</button></div></div></div></form>',
+			theme : '<button type="button" class="btn btn-default bsmd-btn" title="图片" data-toggle="modal" data-target="#{0}-modal-picture"><i class="fa fa-picture-o"></i></button>',
+			modal : '<form class="form-horizontal bsmd-form-picture modal fade" id="{0}-modal-picture" role="dialog" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">图片</h4></div><div class="modal-body"><div class="form-group"><label for="{0}-picture-title" class="col-sm-2 control-label">标题：</label><div class="col-sm-10"><input type="text" name="title" class="form-control" id="{0}-picture-title" placeholder="标题"></div></div><div class="form-group"><label for="{0}-picture-url" class="col-sm-2 control-label">网址：</label><div class="col-sm-10"><input type="text" name="url" value="http://" class="form-control" id="{0}-picture-url" placeholder="网址"></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button><button type="submit" class="btn btn-primary">确定</button></div></div></div></form>',
 			callback : function(theme, source, editor) {
 				//图片
-				theme.on('show.bs.modal', function(e) {
+				$(theme.attr('data-target')).on('show.bs.modal', function(e) {
 					var f = $(this)[0];
 					f.title.value = '';
 					f.url.value = 'http://';
 				});
 
-				theme.on('submit', function() {
+				$(theme.attr('data-target')).on('submit', function() {
 					var f = $(this)[0];
 					addText(editor, '![Alt ' + f.title.value + '](' + f.url.value + ' "' + f.title.value + '")');
 					$(this).modal('hide');
