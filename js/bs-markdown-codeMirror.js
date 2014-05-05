@@ -8,7 +8,7 @@
 		var settings = $.extend(true, {}, $.fn.bsmd.defaults, options);
 
 		var id = 'bsmd-' + (new Date).getTime();
-		var source = $('<div id="' + id + '" class="bsmd" style="width:100%;min-width:685px;height:100%;position:relative;"><div class="btn-toolbar" role="toolbar"></div><div class="bsmd-editor" style="position:absolute;top:40px;bottom:0;left:0;right:0;"></div><div class="bsmd-preview" style="position:absolute;top:40px;bottom:0;left:0;right:0;display:none;"></div></div>');
+		var source = $('<div id="' + id + '" class="bsmd"><div class="btn-toolbar" role="toolbar"></div><div class="bsmd-editor"></div><div class="bsmd-preview"></div></div>');
 		source.insertAfter($(this));
 		var mdText = $(this).is('textarea') ? $(this).val() : $(this).html();
 		$(this).remove();

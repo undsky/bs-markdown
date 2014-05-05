@@ -1,0 +1,39 @@
+.bsmd {
+	width: 100%;
+	min-width: 685px;
+	height: 100%;
+	min-height: 300px;
+	position: relative;
+}
+.bsmd .btn-default, .bsmd .dropdown-toggle.btn-default {
+	color: #333333;
+	background-color: #ffffff;
+	border-color: #cccccc;
+}
+.bsmd .btn-default:hover, .bsmd .btn-default:focus, .bsmd .btn-default:active, .bsmd .btn-default.active, .bsmd .open .dropdown-toggle.btn-default {
+	color: #333333;
+	background-color: #ebebeb;
+	border-color: #adadad;
+}
+.bsmd .fa-header:before {
+	content: 'H';
+	font-family: arial, sans-serif;
+	font-weight: bold;
+}
+.bsmd .bsmd-editor {
+	position: absolute;
+	top: 40px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.bsmd .bsmd-preview {
+	position: absolute;
+	top: 40px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: none;
+	padding: 5px 10px 0;
+	overflow: auto;
+}

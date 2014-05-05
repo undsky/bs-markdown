@@ -103,36 +103,136 @@
                         <i class="fa fa-quote-left"></i>
                     </button>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default bsmd-btn dropdown-toggle" data-toggle="dropdown" title="代码">
+                        <button type="button" class="btn btn-default bsmd-btn" title="代码" data-toggle="modal" data-target="#bsmd-modal-code">
                             <i class="fa fa-code"></i>
-                            <span class="caret"></span>
+                        </button>
+                        <div class="modal fade" id="bsmd-modal-code" role="dialog" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title">代码</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active">
+                                                <a href="#code-lang" data-toggle="tab">语言</a>
+                                            </li>
+                                            <li>
+                                                <a href="#code-example" data-toggle="tab">示例</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="code-lang">
+                                                <table class="table">
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>2</td>
+                                                        <td>3</td>
+                                                        <td>4</td>
+                                                        <td>5</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>2</td>
+                                                        <td>3</td>
+                                                        <td>4</td>
+                                                        <td>5</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>2</td>
+                                                        <td>3</td>
+                                                        <td>4</td>
+                                                        <td>5</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>2</td>
+                                                        <td>3</td>
+                                                        <td>4</td>
+                                                        <td>5</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>2</td>
+                                                        <td>3</td>
+                                                        <td>4</td>
+                                                        <td>5</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane" id="code-example">
+                                                <div class="form-group">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox">
+                                                            code-example </label>
+                                                        <a class="pull-right" href="#">预览</a>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox">
+                                                            code-example </label>
+                                                        <a class="pull-right" href="#">预览</a>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox">
+                                                            code-example </label>
+                                                        <a class="pull-right" href="#">预览</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            关闭
+                                        </button>
+                                        <button type="button" class="btn btn-primary">
+                                            确定
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <button type="button" class="btn btn-default bsmd-btn dropdown-toggle" data-toggle="dropdown" title="代码">
+                        <i class="fa fa-code"></i>
+                        <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a lang="none" class="bsmd-code" href="javascript:void(0);">片段</a>
-                            </li>
-                            <li>
-                                <a lang="html" class="bsmd-code" href="javascript:void(0);">html</a>
-                            </li>
-                            <li>
-                                <a lang="css" class="bsmd-code" href="javascript:void(0);">css</a>
-                            </li>
-                            <li>
-                                <a lang="javascript" class="bsmd-code" href="javascript:void(0);">javascript</a>
-                            </li>
-                            <li>
-                                <a lang="markdown" class="bsmd-code" href="javascript:void(0);">markdown</a>
-                            </li>
-                            <li>
-                                <a lang="php" class="bsmd-code" href="javascript:void(0);">php</a>
-                            </li>
-                            <li>
-                                <a lang="csharp" class="bsmd-code" href="javascript:void(0);">c#</a>
-                            </li>
-                            <li>
-                                <a lang="velocity" class="bsmd-code" href="javascript:void(0);">velocity</a>
-                            </li>
-                        </ul>
+                        <li>
+                        <a lang="none" class="bsmd-code" href="javascript:void(0);">片段</a>
+                        </li>
+                        <li>
+                        <a lang="html" class="bsmd-code" href="javascript:void(0);">html</a>
+                        </li>
+                        <li>
+                        <a lang="css" class="bsmd-code" href="javascript:void(0);">css</a>
+                        </li>
+                        <li>
+                        <a lang="javascript" class="bsmd-code" href="javascript:void(0);">javascript</a>
+                        </li>
+                        <li>
+                        <a lang="markdown" class="bsmd-code" href="javascript:void(0);">markdown</a>
+                        </li>
+                        <li>
+                        <a lang="php" class="bsmd-code" href="javascript:void(0);">php</a>
+                        </li>
+                        <li>
+                        <a lang="csharp" class="bsmd-code" href="javascript:void(0);">c#</a>
+                        </li>
+                        <li>
+                        <a lang="velocity" class="bsmd-code" href="javascript:void(0);">velocity</a>
+                        </li>
+                        </ul> -->
                     </div>
                     <button type="button" class="btn btn-default bsmd-btn" title="图片" data-toggle="modal" data-target="#bsmd-modal-picture">
                         <i class="fa fa-picture-o"></i>
