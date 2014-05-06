@@ -40,6 +40,11 @@
 				right: 0;
 			}
 
+			#bsmd .list-group-code a.list-group-item {
+				display: inline-block;
+				margin-top: 5px;
+			}
+
 			.CodeMirror {
 				height: auto;
 			}
@@ -103,10 +108,10 @@
                         <i class="fa fa-quote-left"></i>
                     </button>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default bsmd-btn" title="代码" data-toggle="modal" data-target="#bsmd-modal-code">
+                        <button type="button" class="btn btn-default bsmd-btn bsmd-btn-code" title="代码" data-toggle="modal" data-target="#bsmd-modal-code">
                             <i class="fa fa-code"></i>
                         </button>
-                        <div class="modal fade" id="bsmd-modal-code" role="dialog" tabindex="-1">
+                        <div class="modal fade bsmd-modal-code" id="bsmd-modal-code" role="dialog" tabindex="-1">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -118,53 +123,67 @@
                                     <div class="modal-body">
                                         <ul class="nav nav-tabs">
                                             <li class="active">
-                                                <a href="#code-lang" data-toggle="tab">语言</a>
+                                                <a href="#bsmd-code-lang" data-toggle="tab">语言</a>
                                             </li>
                                             <li>
-                                                <a href="#code-example" data-toggle="tab">示例</a>
+                                                <a href="#bsmd-code-example" data-toggle="tab">示例</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div class="tab-pane active" id="code-lang">
-                                                <table class="table">
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>2</td>
-                                                        <td>3</td>
-                                                        <td>4</td>
-                                                        <td>5</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>2</td>
-                                                        <td>3</td>
-                                                        <td>4</td>
-                                                        <td>5</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>2</td>
-                                                        <td>3</td>
-                                                        <td>4</td>
-                                                        <td>5</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>2</td>
-                                                        <td>3</td>
-                                                        <td>4</td>
-                                                        <td>5</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>2</td>
-                                                        <td>3</td>
-                                                        <td>4</td>
-                                                        <td>5</td>
-                                                    </tr>
-                                                </table>
+                                            <div class="tab-pane active" id="bsmd-code-lang">
+                                                <div class="list-group list-group-code">
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="">片段</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="htmlembedded&application/x-aspx">ASPX</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="clike&text/x-csrc">C</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="clike&text/x-c++src">C++</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="clike&text/x-csharp">C#</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="coffeescript&text/x-coffeescript">CoffeeScript</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="clojure&text/x-clojure">Clojure</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="commonlisp&text/x-common-lisp">Common Lisp</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="css&text/css">CSS</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="python&text/x-cython">Cython</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="mllike&text/x-fsharp">F#</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="go&text/x-go">Go</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="haml&text/x-haml">HAML</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="haxe&text/x-hxml">Hxml</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="htmlmixed&text/html">HTML</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="http&message/http">HTTP</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="clike&text/x-java">Java</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="jade&text/x-jade">Jade</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="javascript&text/javascript">JavaScript</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="javascript&application/json">JSON</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="htmlembedded&application/x-jsp">JSP</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="css&text/x-less">LESS</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="lua&text/x-lua">Lua</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="markdown&text/x-markdown">Markdown</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="nginx&nginx">Nginx</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="pascal&text/x-pascal">Pascal</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="perl&text/x-perl">Perl</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="php&application/x-httpd-php">PHP</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="python&text/x-python">Python</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="ruby&text/x-ruby">Ruby</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="sass&text/x-sass">Sass</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="clike/text/x-scala">Scala</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="scheme&text/x-scheme">Scheme</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="css&text/x-scss">SCSS</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="shell&text/x-sh">Shell</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="smarty&text/x-smarty">Smarty</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="sql&text/x-sql">SQL</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="sql&text/x-mysql">MySQL</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="sql&text/x-mariadb">MariaDB</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="sql&text/x-cassandra">Cassandra</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="sql&text/x-plsql">PLSQL</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="sql&text/x-mssql">msSQL</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="javascript&application/typescript">TypeScript</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="vb&text/x-vb">VB.NET</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="vbscript&text/vbscript">VBScript</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="velocity&text/velocity">Velocity</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="xml&application/xml">XML</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="xquery&application/xquery">XQuery</a>
+                                                    <a class="list-group-item" href="javascript:void(0);" mode="yaml&text/x-yaml">YAML</a>
+                                                </div>
                                             </div>
-                                            <div class="tab-pane" id="code-example">
+                                            <div class="tab-pane" id="bsmd-code-example">
                                                 <div class="form-group">
                                                     <div class="checkbox">
                                                         <label>
@@ -400,10 +419,10 @@
 					editor.focus();
 				});
 
-				$('#bsmd a.bsmd-code').each(function(index) {
+				$('#bsmd .list-group-code a.list-group-item').each(function(index) {
 					//代码
 					$(this).click(function() {
-						var lang = $(this).attr('lang');
+						var lang = $(this).attr('mode');
 						if ('none' == lang) {
 							addText(editor, '`代码`');
 							selText(editor, 1, 3);
@@ -414,6 +433,7 @@
 							addText(editor, '```');
 							editor.execCommand('goLineUp');
 						}
+						$($('.bsmd-btn-code').attr('data-target')).modal('hide');
 						editor.focus();
 					});
 				});
