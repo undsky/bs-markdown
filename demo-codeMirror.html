@@ -19,7 +19,7 @@
 
         <link href="http://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-        <link href="http://cdn.bootcss.com/codemirror/4.1.0/codemirror.css" rel="stylesheet">
+        <link href="http://cdn.bootcss.com/codemirror/4.0.3/codemirror.min.css" rel="stylesheet">
         <link href="css/bs-markdown.css" rel="stylesheet" />
     </head>
 
@@ -32,13 +32,13 @@
         <script src="http://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
         <!--<![endif]-->
         <script src="http://cdn.bootcss.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="http://cdn.bootcss.com/codemirror/4.1.0/codemirror.min.js"></script>
-        <script src="http://cdn.bootcss.com/codemirror/4.1.0/package/addon/mode/loadmode.js"></script>
+        <script src="http://cdn.bootcss.com/codemirror/4.0.3/codemirror.min.js"></script>
+        <script src="http://cdn.bootcss.com/codemirror/4.0.3/addon/mode/loadmode.min.js"></script>
         <script src="http://cdn.bootcss.com/marked/0.3.2/marked.min.js"></script>
         <script type="text/javascript" src="js/bs-markdown-codeMirror.js"></script>
         <script type="text/javascript">
 			$(function() {
-				CodeMirror.modeURL = 'http://cdn.bootcss.com/codemirror/4.1.0/package/mode/%N/%N.js';
+				CodeMirror.modeURL = "http://cdn.bootcss.com/codemirror/4.0.3/mode/%N/%N.min.js";
 
 				$.fn.bsmd.defaults.toolbar.push(['getValue']);
 				$.fn.bsmd.defaults.getValue = {

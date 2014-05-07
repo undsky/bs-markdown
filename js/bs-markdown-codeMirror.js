@@ -251,6 +251,25 @@
 					$('.bsmd-preview', source).toggle('fast', function() {
 						if ($(this).is(':visible'))
 							$(this).html(marked(editor.getValue()));
+
+						if (CodeMirror.autoLoadMode)
+							$(this).find('code').each(function(index) {
+								var cl = $(this).attr('class');
+								if (cl && 'lang' == cl.substring(0, 4)) {
+									var mode = cl.substring(5, cl.length).split('&');
+									var code = $(this).text();
+									$(this).text('');
+									var cm = CodeMirror($(this)[0], {
+										lineNumbers : true,
+										readOnly : true
+									});
+
+									cm.setOption('mode', mode[1]);
+									CodeMirror.autoLoadMode(cm, mode[0]);
+
+									cm.setValue(code);
+								};
+							});
 					});
 					$('.bsmd-btn', source).toggleClass('disabled');
 				});
