@@ -23,7 +23,68 @@
     </head>
 
     <body>
-        <div id="bsmd"></div>
+        <div style="position: absolute;top: 0;right: 0;bottom: 50%;left: 0;">
+            <textarea id="bsmd1">
+[**bs-markdown**](https://github.com/undsky/bs-markdown "bs-markdown")-ace
+-------
+
+*基于bootstrap，ace，marked*
+
+-------
+
+>兼容ie9+
+
+>预览代码高亮显示
+
+
+```markdown
+[**bs-markdown**](https://github.com/undsky/bs-markdown "bs-markdown")-ace
+-------
+
+*基于bootstrap，ace，marked*
+
+-------
+
+>兼容ie9+
+
+>预览代码高亮显示
+```
+
+
+>示例代码嵌入                
+            </textarea>
+        </div>
+        <div style="position: absolute;top: 50%;right: 0;bottom: 0;left: 0;">
+            <div id="bsmd2">
+[**bs-markdown**](https://github.com/undsky/bs-markdown "bs-markdown")-ace
+-------
+
+*基于bootstrap，ace，marked*
+
+-------
+
+>兼容ie9+
+
+>预览代码高亮显示
+
+
+```markdown
+[**bs-markdown**](https://github.com/undsky/bs-markdown "bs-markdown")-ace
+-------
+
+*基于bootstrap，ace，marked*
+
+-------
+
+>兼容ie9+
+
+>预览代码高亮显示
+```
+
+
+>示例代码嵌入                
+            </div>
+        </div>
         <!--[if lt IE 9]>
         <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
         <![endif]-->
@@ -36,9 +97,13 @@
         <script type="text/javascript" src="js/bs-markdown-ace.js"></script>
         <script type="text/javascript">
 			$(function() {
+				$('#bsmd1').bsmd();
+
 				$.fn.bsmd.defaults.toolbar.push(['getValue']);
 				$.fn.bsmd.defaults.getValue = {
-					theme : '<button type="button" class="btn btn-default bsmd-btn-getValue" title="getValue">getValue</button>',
+					theme : function(id) {
+						return '<button type="button" class="btn btn-default bsmd-btn-getValue" title="getValue">getValue</button>';
+					},
 					callback : function(theme, source, editor) {
 						theme.on('click', function() {
 							alert(editor.getValue());
@@ -62,19 +127,24 @@
 
 						editor.on('change', function() {
 							$('.bsmd-preview', source).html(marked(editor.getValue()));
+
 							$('.bsmd-preview', source).find('code').each(function(index) {
 								var cl = $(this).attr('class');
 								if (cl && 'lang' == cl.substring(0, 4)) {
 									var mode = cl.substring(5, cl.length);
-									var html = $.trim($(this).text());
-									$(this).parent().height($(this).height());
-									$(this).text('');
-									var aceEditor = ace.edit($(this).parent()[0]);
+									var code = $(this).text();
+									var p = $(this).parent().empty();
+
+									var aceEditor = ace.edit(p[0]);
 
 									aceEditor.setTheme('ace/theme/chrome');
 									aceEditor.getSession().setMode('ace/mode/' + mode);
+									aceEditor.setValue(code);
 
-									aceEditor.setValue(html);
+									aceEditor.setOptions({
+										maxLines : Infinity
+									});
+
 									aceEditor.setReadOnly(true);
 									aceEditor.clearSelection();
 								};
@@ -83,7 +153,7 @@
 					}
 				};
 
-				$('#bsmd').bsmd();
+				$('#bsmd2').bsmd();
 			});
         </script>
     </body>

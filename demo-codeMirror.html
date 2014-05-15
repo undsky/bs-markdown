@@ -19,12 +19,78 @@
 
         <link href="http://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-        <link href="http://cdn.bootcss.com/codemirror/4.0.3/codemirror.min.css" rel="stylesheet">
+        <link href="http://cdn.bootcss.com/codemirror/4.1.0/codemirror.css" rel="stylesheet">
         <link href="css/bs-markdown.css" rel="stylesheet" />
+        <style type="text/css">
+			.CodeMirror {
+				height: 100%;
+			}
+        </style>
     </head>
 
     <body>
-        <div id="bsmd"></div>
+        <div style="position: absolute;top: 0;right: 0;bottom: 50%;left: 0;">
+            <textarea id="bsmd1">
+[**bs-markdown**](https://github.com/undsky/bs-markdown "bs-markdown")-ace
+-------
+
+*基于bootstrap，ace，marked*
+
+-------
+
+>兼容ie9+
+
+>预览代码高亮显示
+
+
+```markdown&text/x-markdown
+[**bs-markdown**](https://github.com/undsky/bs-markdown "bs-markdown")-codeMirror
+-------
+
+*基于bootstrap，ace，marked*
+
+-------
+
+>兼容ie9+
+
+>预览代码高亮显示
+```
+
+
+>示例代码嵌入                         
+            </textarea>
+        </div>
+        <div style="position: absolute;top: 50%;right: 0;bottom: 0;left: 0;">
+            <div id="bsmd2">
+[**bs-markdown**](https://github.com/undsky/bs-markdown "bs-markdown")-codeMirror
+-------
+
+*基于bootstrap，ace，marked*
+
+-------
+
+>兼容ie9+
+
+>预览代码高亮显示
+
+
+```markdown&text/x-markdown
+[**bs-markdown**](https://github.com/undsky/bs-markdown "bs-markdown")-ace
+-------
+
+*基于bootstrap，ace，marked*
+
+-------
+
+>兼容ie9+
+
+>预览代码高亮显示
+```
+
+
+>示例代码嵌入                         
+            </div>
+        </div>
         <!--[if lt IE 9]>
         <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
         <![endif]-->
@@ -32,17 +98,21 @@
         <script src="http://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
         <!--<![endif]-->
         <script src="http://cdn.bootcss.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="http://cdn.bootcss.com/codemirror/4.0.3/codemirror.min.js"></script>
-        <script src="http://cdn.bootcss.com/codemirror/4.0.3/addon/mode/loadmode.js"></script>
+        <script src="http://cdn.bootcss.com/codemirror/4.1.0/codemirror.min.js"></script>
+        <script src="http://cdn.bootcss.com/codemirror/4.1.0/package/addon/mode/loadmode.js"></script>
         <script src="http://cdn.bootcss.com/marked/0.3.2/marked.min.js"></script>
         <script type="text/javascript" src="js/bs-markdown-codeMirror.js"></script>
         <script type="text/javascript">
 			$(function() {
-				CodeMirror.modeURL = "http://cdn.bootcss.com/codemirror/4.0.3/mode/%N/%N.min.js";
+				CodeMirror.modeURL = "http://cdn.bootcss.com/codemirror/4.1.0/package/mode/%N/%N.js";
+
+				CodeMirror.autoLoadMode($('#bsmd1').bsmd(), 'markdown');
 
 				$.fn.bsmd.defaults.toolbar.push(['getValue']);
 				$.fn.bsmd.defaults.getValue = {
-					theme : '<button type="button" class="btn btn-default bsmd-btn-getValue" title="getValue">getValue</button>',
+					theme : function(id) {
+						return '<button type="button" class="btn btn-default bsmd-btn-getValue" title="getValue">getValue</button>';
+					},
 					callback : function(theme, source, editor) {
 						theme.on('click', function() {
 							alert(editor.getValue());
@@ -74,20 +144,19 @@
 									$(this).text('');
 									var cm = CodeMirror($(this)[0], {
 										lineNumbers : true,
-										readOnly : true
+										readOnly : true,
+										mode : mode[1],
+										value : code
 									});
 
-									cm.setOption('mode', mode[1]);
 									CodeMirror.autoLoadMode(cm, mode[0]);
-
-									cm.setValue(code);
 								};
 							});
 						});
 					}
 				};
 
-				$('#bsmd').bsmd();
+				CodeMirror.autoLoadMode($('#bsmd2').bsmd(), 'markdown');
 			});
         </script>
     </body>
