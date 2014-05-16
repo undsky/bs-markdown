@@ -19,8 +19,6 @@ bs-markdown
 $('#bsmd').bsmd();
 ```
 
--------
-
 **highlight by CodeMirror**
 
 ```javascript
