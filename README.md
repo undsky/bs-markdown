@@ -13,7 +13,7 @@ bs-markdown
             
 -------
 
-**ace**
+**highlight by ace**
 
 ```javascript
 $('#bsmd').bsmd();
@@ -21,7 +21,7 @@ $('#bsmd').bsmd();
 
 -------
 
-**CodeMirror**
+**highlight by CodeMirror**
 
 ```javascript
 CodeMirror.autoLoadMode($('#bsmd').bsmd(), 'markdown');
