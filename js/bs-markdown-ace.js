@@ -11,7 +11,7 @@
 		var id = 'bsmd-' + (new Date).getTime();
 		var source = $('<div id="' + id + '" class="bsmd"><div class="btn-toolbar" role="toolbar"></div><div class="bsmd-editor"></div><div class="bsmd-preview"></div></div>');
 		source.insertAfter($(this));
-		var txt = $(this).is('textarea') ? $(this).val() : $(this).html() ? $.parseHTML($(this).html())[0].data : '';
+		var txt = $(this).is('textarea') ? $(this).val() : $(this).text();
 		$(this).remove();
 
 		var editor = ace.edit($('#' + id + ' .bsmd-editor')[0]);
@@ -396,15 +396,12 @@
 									var p = $(this).parent().empty();
 
 									var aceEditor = ace.edit(p[0]);
-
 									aceEditor.setTheme('ace/theme/chrome');
 									aceEditor.getSession().setMode('ace/mode/' + mode);
 									aceEditor.setValue(code);
-
 									aceEditor.setOptions({
 										maxLines : Infinity
 									});
-
 									aceEditor.setReadOnly(true);
 									aceEditor.clearSelection();
 								};

@@ -1,7 +1,7 @@
 (function($) {
 	/**
 	 *
-	 * IE6+
+	 * IE8+
 	 * @param {Object} options
 	 */
 	$.fn.bsmd = function(options) {
@@ -10,13 +10,12 @@
 		var id = 'bsmd-' + (new Date).getTime();
 		var source = $('<div id="' + id + '" class="bsmd"><div class="btn-toolbar" role="toolbar"></div><div class="bsmd-editor"></div><div class="bsmd-preview"></div></div>');
 		source.insertAfter($(this));
-		var txt = $(this).is('textarea') ? $(this).val() : $(this).html() ? $.parseHTML($(this).html())[0].data : '';
+		var txt = $(this).is('textarea') ? $(this).val() : $(this).text();
 		$(this).remove();
 
 		var editor = CodeMirror($('#' + id + ' .bsmd-editor')[0], {
 			lineNumbers : true,
-			mode : 'text/x-markdown',
-			value : txt
+			mode : 'text/x-markdown'
 		});
 
 		for (var i = 0; i < settings.toolbar.length; i++) {
@@ -26,6 +25,9 @@
 				bt.callback(bt.theme ? $(bt.theme(id)).appendTo(bg) : null, source, editor);
 			}
 		}
+
+		if (txt)
+			editor.setValue(txt);
 
 		return editor;
 	};

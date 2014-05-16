@@ -20,6 +20,12 @@
 	font-family: arial, sans-serif;
 	font-weight: bold;
 }
+.bsmd-modal-code .modal-dialog {
+	width: 750px;
+}
+.bsmd-modal-code .modal-footer {
+	margin: 0;
+}
 .bsmd-modal-code .list-group-code a.list-group-item {
 	display: inline-block;
 	margin: 5px 5px 0 0;

@@ -28,11 +28,11 @@
 [**bs-markdown**](https://github.com/undsky/bs-markdown "bs-markdown")-ace
 -------
 
-*基于bootstrap，ace，marked*
+*基于bootstrap,ace,marked*
 
 -------
 
->兼容ie9+
+>兼容ie9+,Firefox,Chrome
 
 >预览代码高亮显示
 
@@ -41,11 +41,11 @@
 [**bs-markdown**](https://github.com/undsky/bs-markdown "bs-markdown")-ace
 -------
 
-*基于bootstrap，ace，marked*
+*基于bootstrap,ace,marked*
 
 -------
 
->兼容ie9+
+>兼容ie9+,Firefox,Chrome
 
 >预览代码高亮显示
 ```
@@ -55,15 +55,15 @@
             </textarea>
         </div>
         <div style="position: absolute;top: 50%;right: 0;bottom: 0;left: 0;">
-            <div id="bsmd2">
+            <textarea id="bsmd2">
 [**bs-markdown**](https://github.com/undsky/bs-markdown "bs-markdown")-ace
 -------
 
-*基于bootstrap，ace，marked*
+*基于bootstrap,ace,marked*
 
 -------
 
->兼容ie9+
+>兼容ie9+,Firefox,Chrome
 
 >预览代码高亮显示
 
@@ -72,18 +72,18 @@
 [**bs-markdown**](https://github.com/undsky/bs-markdown "bs-markdown")-ace
 -------
 
-*基于bootstrap，ace，marked*
+*基于bootstrap,ace,marked*
 
 -------
 
->兼容ie9+
+>兼容ie9+,Firefox,Chrome
 
 >预览代码高亮显示
 ```
 
 
 >示例代码嵌入                
-            </div>
+            </textarea>
         </div>
         <!--[if lt IE 9]>
         <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
@@ -136,15 +136,12 @@
 									var p = $(this).parent().empty();
 
 									var aceEditor = ace.edit(p[0]);
-
 									aceEditor.setTheme('ace/theme/chrome');
 									aceEditor.getSession().setMode('ace/mode/' + mode);
 									aceEditor.setValue(code);
-
 									aceEditor.setOptions({
 										maxLines : Infinity
 									});
-
 									aceEditor.setReadOnly(true);
 									aceEditor.clearSelection();
 								};
