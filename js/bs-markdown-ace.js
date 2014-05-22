@@ -232,8 +232,15 @@
 
 				var modal = ('<div class="modal fade bsmd-modal-code" id="' + id + '-modal-code" role="dialog" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">代码</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#' + id + '-code-lang" data-toggle="tab">语言</a></li><li><a href="#' + id + '-code-example" data-toggle="tab">示例</a></li></ul><div class="tab-content"><div class="tab-pane active" id="' + id + '-code-lang"><div class="list-group list-group-code">');
 
+				var br = '片';
 				for (var key in mode) {
 					if (mode.hasOwnProperty(key)) {
+						var cr = mode[key].substring(0, 1).toLowerCase();
+						if (br != cr) {
+							modal += '<br/>';
+							br = cr;
+						}
+
 						modal += '<a class="list-group-item" href="javascript:void(0);" mode="' + key + '">' + mode[key] + '</a>';
 					}
 				}

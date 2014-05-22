@@ -23,12 +23,16 @@
 .bsmd-modal-code .modal-dialog {
 	width: 750px;
 }
-.bsmd-modal-code .modal-footer {
+.bsmd-modal-code .modal-body .list-group {
 	margin: 0;
 }
 .bsmd-modal-code .list-group-code a.list-group-item {
 	display: inline-block;
 	margin: 5px 5px 0 0;
+	padding: 7px;
+}
+.bsmd-modal-code .modal-footer {
+	margin: 0;
 }
 .bsmd .bsmd-editor {
 	position: absolute;
