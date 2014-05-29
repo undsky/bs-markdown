@@ -15,11 +15,6 @@
 	background-color: #ebebeb;
 	border-color: #adadad;
 }
-.bsmd .fa-header:before {
-	content: 'H';
-	font-family: arial, sans-serif;
-	font-weight: bold;
-}
 .bsmd-modal-code .modal-dialog {
 	width: 750px;
 }
